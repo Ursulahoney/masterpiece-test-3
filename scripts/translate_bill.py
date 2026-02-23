@@ -90,6 +90,10 @@ def parse_line_items(text):
     if not text or blank(text):
         return [], ["No line-item data provided."]
 
+    # GitHub Issue Forms with render:text wrap content in code fences — strip them
+    text = re.sub(r"^```[^\n]*\n?", "", text.strip())
+    text = re.sub(r"\n?```\s*$", "", text.strip())
+
     delimiter = detect_delimiter(text)
     rows = []
     errors = []
