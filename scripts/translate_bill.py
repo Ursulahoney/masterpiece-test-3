@@ -328,17 +328,17 @@ def format_output(header_info, section2, dup_groups, clarifications, input_error
         lines.append(f"- **{key}:** {val}")
     lines.append("")
 
-    # --- SECTION 2 ---
+       # --- SECTION 2 ---
     lines.append("SECTION 2: Plain-English Line Item Table")
     lines.append("")
     lines.append("| Line # | DOS | Code | Code Type | Official Description | Plain-English | Units | Charge |")
-lines.append("|---|---|---|---|---|---|---|---|")
-for e in section2:
-    charge_str = fmt_money(e["charge"])
-    lines.append(
-        f"| {e['line_id']} | {e['dos']} | {e['code']} | {e['code_type']} "
-        f"| {e['official_desc']} | {e['plain_eng']} | {e['units']} | {charge_str} |"
-    )
+    lines.append("|---|---|---|---|---|---|---|---|")
+    for e in section2:
+        charge_str = fmt_money(e["charge"])
+        lines.append(
+            f"| {e['line_id']} | {e['dos']} | {e['code']} | {e['code_type']} "
+            f"| {e['official_desc']} | {e['plain_eng']} | {e['units']} | {charge_str} |"
+        )
     lines.append("")
 
     # --- SECTION 3 ---
