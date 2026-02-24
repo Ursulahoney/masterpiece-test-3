@@ -229,7 +229,7 @@ def evaluate_line_items(rows, code_defs):
         # Clarification trigger: units = 0 AND charge > 0
         if units == 0 and charge > 0:
             needs_clarification = True
-            clarification_reasons.append("units = 0 with charge > 0")
+            clarification_reasons.append("units = 0 AND charge > 0")
 
         # Clarification trigger: code_type is MOD and charge > 0
         if code_type == "MOD" and charge > 0:
@@ -309,7 +309,7 @@ def format_output(header_info, section2, dup_groups, clarifications, input_error
 
     # --- Input Problems (if any) ---
     if input_errors:
-        lines.append("INPUT PROBLEMS")
+        lines.append("Input Problems")
         lines.append("")
         lines.append("The following rows could not be parsed and are excluded from the output below:")
         lines.append("")
@@ -331,15 +331,14 @@ def format_output(header_info, section2, dup_groups, clarifications, input_error
     # --- SECTION 2 ---
     lines.append("SECTION 2: Plain-English Line Item Table")
     lines.append("")
-    lines.append("| Line # | DOS | Code | Code Type | Official Description | Plain-English | Units | Charge | Notes |")
-    lines.append("|---|---|---|---|---|---|---|---|---|")
-    for e in section2:
-        charge_str = fmt_money(e["charge"])
-        lines.append(
-            f"| {e['line_id']} | {e['dos']} | {e['code']} | {e['code_type']} "
-            f"| {e['official_desc']} | {e['plain_eng']} | {e['units']} | {charge_str} "
-            f"| {e['notes']} |"
-        )
+    lines.append("| Line # | DOS | Code | Code Type | Official Description | Plain-English | Units | Charge |")
+lines.append("|---|---|---|---|---|---|---|---|")
+for e in section2:
+    charge_str = fmt_money(e["charge"])
+    lines.append(
+        f"| {e['line_id']} | {e['dos']} | {e['code']} | {e['code_type']} "
+        f"| {e['official_desc']} | {e['plain_eng']} | {e['units']} | {charge_str} |"
+    )
     lines.append("")
 
     # --- SECTION 3 ---
